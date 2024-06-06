@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <title>Side Panel</title>
+  <style>
+    .dot-flashing {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100%;
+      background-color: white;
+    }
+    .dot-flashing div {
+      width: 0.5em;
+      height: 0.5em;
+      border-radius: 0.25em;
+      background-color: #333;
+      animation: dotFlashing 1s infinite linear alternate;
+      margin-right: 0.5em;
+    }
+    .dot-flashing div:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .dot-flashing div:nth-child(3) {
+      animation-delay: 1s;
+    }
+    @keyframes dotFlashing {
+      0% {
+        background-color: #333;
+      }
+      50%, 100% {
+        background-color: #ccc;
+      }
+    }
+    .copy-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0.5em;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: #007BFF;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-side-panel" class="flex flex-col h-full bg-white shadow-lg">
+    <div class="flex justify-between items-center p-4 bg-blue-500 text-white">
+      <h2 class="text-xl">Chat Panel</h2>
+      <div class="flex space-x-2">
+        <button id="prompt-button" class="text-xl">✎</button>
+        <button id="settings-button" class="text-xl">⚙</button>
+        <button id="close-panel" class="text-xl">×</button>
+      </div>
+    </div>
+    <div id="chat-content" class="p-4 flex-grow overflow-y-auto"></div>
+    <div class="p-4 border-t">
+      <button id="help-button" class="w-full p-2 bg-blue-500 text-white rounded">Help!</button>
+    </div>
+  </div>
+
+  <div id="api-key-panel" class="flex flex-col h-full bg-white shadow-lg hidden">
+    <div class="flex justify-between items-center p-4 bg-green-500 text-white">
+      <h2 class="text-xl">API Key Panel</h2>
+      <div class="flex space-x-2">
+        <button id="back-to-chat" class="text-xl">←</button>
+        <button id="close-api-panel" class="text-xl">×</button>
+      </div>
+    </div>
+    <div class="p-4 flex-grow overflow-y-auto">
+      <input type="text" id="api-key-input" class="w-full p-2 border rounded mb-4" placeholder="Enter your API key">
+      <button id="save-api-key" class="w-full p-2 bg-blue-500 text-white rounded">Save API Key</button>
+    </div>
+  </div>
+
+  <div id="prompt-panel" class="flex flex-col h-full bg-white shadow-lg hidden">
+    <div class="flex justify-between items-center p-4 bg-blue-700 text-white">
+      <h2 class="text-xl">Prompt Management</h2>
+      <div class="flex space-x-2">
+        <button id="back-to-chat-from-prompt" class="text-xl">←</button>
+        <button id="close-prompt-panel" class="text-xl">×</button>
+      </div>
+    </div>
+    <div class="p-4 flex-grow overflow-y-auto">
+      <textarea id="prompt-input" class="w-full p-2 border rounded mb-4" placeholder="Enter your prompt with \${content}"></textarea>
+      <button id="save-prompt" class="w-full p-2 bg-blue-500 text-white rounded">Save Prompt</button>
+    </div>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>
+
