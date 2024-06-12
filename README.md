@@ -7,7 +7,7 @@ PageContentsHelper is a Chrome extension designed to help users get responses fr
 
 1. Clone or download this repository.
    ```sh
-   git clone https://github.com/yourusername/your-repo.git
+   git clone https://github.com/ryo-suganuma/page_contents_helper.git
 
 2. Open Chrome and navigate to the extensions management page by entering `chrome://extensions/` in the address bar.
 
