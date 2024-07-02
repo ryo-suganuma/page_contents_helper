@@ -19,17 +19,7 @@ chrome.action.onClicked.addListener((tab) => {
 });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-  if (request.action === 'toggleSidePanel') {
-    chrome.sidePanel.setOptions({
-      enabled: request.enabled
-    }).then(() => {
-      sendResponse({ success: true });
-    }).catch((error) => {
-      console.error('Error toggling side panel:', error);
-      sendResponse({ success: false, error: error });
-    });
-    return true; // Indicates that the response is sent asynchronously
-  } else if (request.action === "saveApiKey") {
+  if (request.action === "saveApiKey") {
     chrome.storage.local.set({ apiKey: request.apiKey }, () => {
       sendResponse({ success: true });
     });

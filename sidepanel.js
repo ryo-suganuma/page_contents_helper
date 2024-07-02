@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const chatContent = document.getElementById('chat-content');
   const helpButton = document.getElementById('help-button');
-  const closeButton = document.getElementById('close-panel');
   const settingsButton = document.getElementById('settings-button');
   const promptButton = document.getElementById('prompt-button');
   const backButton = document.getElementById('back-to-chat');
@@ -108,10 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  closeButton.addEventListener('click', () => {
-    chrome.runtime.sendMessage({ action: 'toggleSidePanel', enabled: false });
-  });
-
   settingsButton.addEventListener('click', () => {
     chatPanel.classList.add('hidden');
     apiPanel.classList.remove('hidden');
@@ -132,17 +127,9 @@ document.addEventListener('DOMContentLoaded', () => {
     apiPanel.classList.add('hidden');
   });
 
-  closeApiButton.addEventListener('click', () => {
-    chrome.runtime.sendMessage({ action: 'toggleSidePanel', enabled: false });
-  });
-
   backPromptButton.addEventListener('click', () => {
     chatPanel.classList.remove('hidden');
     promptPanel.classList.add('hidden');
-  });
-
-  closePromptButton.addEventListener('click', () => {
-    chrome.runtime.sendMessage({ action: 'toggleSidePanel', enabled: false });
   });
 
   saveApiKeyButton.addEventListener('click', () => {
