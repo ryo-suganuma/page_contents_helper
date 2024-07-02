@@ -28,8 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         element.style.display = 'none';
         element.classList.remove('fade-out');
-      }, 1000); // Align this with the fade-out duration.
-    }, 800);
+      }, 500); // Align this with the fade-out duration
+    }, 700); // Start fade-out after 0.7 seconds
+  };
+
+  const showCopyTooltip = (button, message) => {
+    const tooltip = document.createElement('div');
+    tooltip.classList.add('copy-tooltip');
+    tooltip.textContent = message;
+    button.appendChild(tooltip);
+    setTimeout(() => {
+      tooltip.classList.add('fade-out');
+      setTimeout(() => {
+        button.removeChild(tooltip);
+      }, 500); // Align this with the fade-out duration
+    }, 700); // Start fade-out after 0.7 seconds
   };
 
   const loadInitialMessage = (content, isFetching = false) => {
@@ -51,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       copyButton.innerHTML = '<i class="fas fa-copy"></i>';
       copyButton.addEventListener('click', () => {
         navigator.clipboard.writeText(text.innerText).then(() => {
-          alert('Text copied to clipboard');
+          showCopyTooltip(copyButton, 'Text copied to clipboard');
         });
       });
       message.appendChild(copyButton);
@@ -113,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           } else {
             chatContent.removeChild(fetchingMessage);
-            loadInitialMessage('Failed to retrieve page content.');
+            loadInitialMessage('Failed to retrieve page content. Please reload the page and try again.');
           }
         });
       } else {
