@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatPanel = document.getElementById('chat-side-panel');
   const apiPanel = document.getElementById('api-key-panel');
   const promptPanel = document.getElementById('prompt-panel');
-  
+
   const chatContent = document.getElementById('chat-content');
   const helpButton = document.getElementById('help-button');
   const settingsButton = document.getElementById('settings-button');
@@ -15,6 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const apiKeyInput = document.getElementById('api-key-input');
   const savePromptButton = document.getElementById('save-prompt');
   const promptInput = document.getElementById('prompt-input');
+
+  const apiKeyMessage = document.getElementById('api-key-message');
+  const promptMessage = document.getElementById('prompt-message');
+
+  const showMessage = (element, message, isSuccess) => {
+    element.textContent = message;
+    element.className = `message ${isSuccess ? 'success' : 'error'}`;
+    element.style.display = 'block';
+    setTimeout(() => {
+      element.classList.add('fade-out');
+      setTimeout(() => {
+        element.style.display = 'none';
+        element.classList.remove('fade-out');
+      }, 1000); // Align this with the fade-out duration.
+    }, 800);
+  };
 
   const loadInitialMessage = (content, isFetching = false) => {
     const message = document.createElement('div');
@@ -137,10 +153,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (apiKey.trim() !== '') {
       chrome.runtime.sendMessage({ action: "saveApiKey", apiKey: apiKey }, (response) => {
         if (response && response.success) {
-          alert('API Key saved');
+          showMessage(apiKeyMessage, 'API Key saved', true);
           apiKeyInput.value = '';
         } else {
-          alert('Failed to save API Key');
+          showMessage(apiKeyMessage, 'Failed to save API Key', false);
         }
       });
     }
@@ -151,9 +167,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (prompt.trim() !== '') {
       chrome.runtime.sendMessage({ action: "savePrompt", prompt: prompt }, (response) => {
         if (response && response.success) {
-          alert('Prompt saved');
+          showMessage(promptMessage, 'Prompt saved', true);
         } else {
-          alert('Failed to save Prompt');
+          showMessage(promptMessage, 'Failed to save Prompt', false);
         }
       });
     }
