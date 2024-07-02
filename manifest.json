@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "PageContentsHelper",
-  "version": "1.0",
+  "version": "0.0.1",
   "description": "Have ChatGPT output responses based on the prompt input. Template strings can be used to reference content within an open page.",
   "permissions": [
     "activeTab",

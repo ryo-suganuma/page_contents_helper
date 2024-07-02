@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             chrome.runtime.sendMessage({ action: "getApiKey" }, (apiKeyResponse) => {
               if (apiKeyResponse && apiKeyResponse.apiKey) {
                 const messages = [
-                  { role: "system", content: "あなたはドキュメント要約のスペシャリストです。" },
+                  { role: "system", content: "You are a helpful assistant designed to output Markdown." },
                   { role: "user", content: expandedPrompt }
                 ];
 
@@ -72,9 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     'Authorization': `Bearer ${apiKeyResponse.apiKey}`
                   },
                   body: JSON.stringify({
-                    model: "gpt-4",
+                    model: "gpt-4o",
                     messages: messages,
-                    max_tokens: 1500
+                    max_tokens: 4000
                   })
                 })
                 .then(response => response.json())
